@@ -22,9 +22,10 @@ test("procesar convierte el nombre a mayúsculas", () => {
 
   assert.equal(res.statusCode, 200);
   assert.deepEqual(res.body, {
-  resultado: "Nombre procesado: JUAN",
-  longitud: 4
-});
+    resultado: "Nombre procesado: JUAN",
+    longitud: 4
+  });
+}); // ✅ cierre que faltaba
 
 test("procesar maneja nombre ausente", () => {
   const req = { query: {} };
@@ -48,7 +49,6 @@ test("procesar maneja nombre ausente", () => {
   assert.ok(res.body.resultado.includes("ANÓNIMO"));
 });
 
-
 test("politica minima de calidad: formato y mayusculas", () => {
   const req = { query: { nombre: "LiaM" } };
 
@@ -69,8 +69,10 @@ test("politica minima de calidad: formato y mayusculas", () => {
 
   assert.equal(res.statusCode, 200);
   assert.ok(typeof res.body.resultado === "string");
+
   const prefijo = "Nombre procesado: ";
   assert.ok(res.body.resultado.startsWith(prefijo));
+
   const nombreProcesado = res.body.resultado.slice(prefijo.length);
   assert.equal(nombreProcesado, nombreProcesado.toUpperCase());
 
@@ -78,4 +80,3 @@ test("politica minima de calidad: formato y mayusculas", () => {
     assert.ok(Number.isInteger(res.body.longitud));
   }
 });
-
