@@ -80,3 +80,26 @@ test("politica minima de calidad: formato y mayusculas", () => {
     assert.ok(Number.isInteger(res.body.longitud));
   }
 });
+
+test('procesar simula falla cuando nombre === "error"', () => {
+  const req = { query: { nombre: "error" } };
+
+  const res = {
+    statusCode: null,
+    body: null,
+    status(code) {
+      this.statusCode = code;
+      return this;
+    },
+    json(payload) {
+      this.body = payload;
+      return this;
+    }
+  };
+
+  handler(req, res);
+
+  assert.equal(res.statusCode, 500);
+  assert.deepEqual(res.body, { error: "Falla simulada" });
+});
+
