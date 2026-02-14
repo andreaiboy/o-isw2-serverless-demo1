@@ -6,7 +6,7 @@ export default function handler(req, res) {
       if (1 === 1) {
         res.status(200).json({
           resultado: "Nombre procesado: ANÓNIMO",
-          longitud: 8
+          longitud: 4
         });
       }
     }
